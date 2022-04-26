@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            window.onSubmit = () => {
+                const range = document.getElementById('range').value
+                const rawText = document.getElementById('rawText').value
+
+                fetch('',  {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        range: range.trim().length > 0 ? range.split(',') : undefined, 
+                        rawText 
+                    })
+                }).then(response => response.json())
+                .then(res => console.log(res))
+            }
+        </script>
+    </head>
+    <body>
+            <label>Raw Text</label>
+            <textarea id="rawText" rows="10" cols="80" type="text" name="rawText"> 
+                CHAPTER I
+
+                My dog eats slowly. 
+                
+                I have a friend–Isabel.
+                
+                CHAPTER II
+                
+                My friend, Isabel, also eats slowly.
+            </textarea>
+            <label>Chapter Selections (Comma-separated)</label>
+            <input id="range" type="text" name="range" />
+            <button onclick="window.onSubmit()">Submit</button>
+        </form>
+
+    </body>
+</html>
